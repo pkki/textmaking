@@ -1,15 +1,14 @@
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
         <title>謎のツール</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div class="setting" id="sett">
            <span>大きさ<input type="range" max="500" min="1" id="fontsize" oninput="fontsize();" value="200"></span>
-           <span>テキスト
-            <textarea type="text" value="パソコン" id="texts" onkeyup="change()">パソコン</textarea></span>
+           <span>テキスト<textarea type="text" value="パソコン" id="texts" onkeyup="change()">パソコン</textarea></span>
            <span>文字の色<input type="color" oninput="color()" id="color"></span>
            <span>背景の色<input type="color" oninput="backcolor()" id="backcolor" value="#ffffff"></span>
            <span>フォント<input type="text" id="fontfile" placeholder="リンクorファイル(.ttf)"> <button onclick="changefont()">変更</button></span>
