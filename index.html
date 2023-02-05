@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>謎のツール</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="setting" id="sett">
+           <span>大きさ<input type="range" max="500" min="1" id="fontsize" oninput="fontsize();" value="200"></span>
+           <span>テキスト
+            <textarea type="text" value="パソコン" id="texts" onkeyup="change()">パソコン</textarea></span>
+           <span>文字の色<input type="color" oninput="color()" id="color"></span>
+           <span>背景の色<input type="color" oninput="backcolor()" id="backcolor" value="#ffffff"></span>
+           <span>フォント<input type="text" id="fontfile" placeholder="リンクorファイル(.ttf)"> <button onclick="changefont()">変更</button></span>
+           <span>スクショ:サイズ設定<input type="text" id="sizeyoko" placeholder="横" value="1980"><input type="text" id="sizetate" placeholder="縦" value="1080">
+           <button onclick="sizesyu()">画面サイズ取得</button><button onclick="sc()">カシャ!</button></span>
+           <a id="getImage" href="" style="display: none"></a>
+           
+
+        </div>
+        <div class="big" id="sc">
+            <h1 id="sizee">パソコン</h1>
+        </div>
+    </body>
+    <script src="html2canvas.js"></script>
+    <script>
+        function fontsize(){
+            let size = document.getElementById('fontsize');
+            var geth1 = document.getElementById('sizee');
+            geth1.style.fontSize= (size.value+"px");
+        }
+        function change(){
+            let get = document.getElementById('texts');
+            let geth1 = document.getElementById('sizee');
+            geth1.innerText = get.value;
+        }
+        function color(){
+            let color = document.getElementById('color');
+            let geth1 = document.getElementById('sizee');
+            geth1.style.color=color.value;
+        }
+        function changefont(){
+            var fontfile = document.getElementById('fontfile').value;
+            var fontFace = new FontFace(
+  "Cosmos Logic", 
+  "url("+fontfile+")", 
+  { style: 'normal'}
+);
+ 
+fontFace.load().then(function(loadedFace){
+  /// フォント読み込み成功
+  /// body要素全体にそれを適用する
+  document.fonts.add(loadedFace);
+  let geth1 = document.getElementById('sizee');
+  sizee.style.fontFamily = '"Cosmos Logic"';
+}).catch(function(e){
+  /// フォント読み込み失敗
+  console.error('読み込み失敗...');
+  alert("フォントの読み込みに失敗");
+});
+        }
+        function sc(){
+        let varr = document.getElementById('sett');
+        let yoko = document.getElementById('sizeyoko').value;
+        let tate = document.getElementById('sizetate').value;
+        varr.style.display="none";
+            const element = document.body; 
+const getImage = document.getElementById("getImage"); 
+html2canvas(element,{
+        windowWidth: yoko,
+        width: yoko,
+        height:tate,
+        windowHeight:tate
+    }).then(canvas => {
+    getImage.setAttribute("href", canvas.toDataURL());
+    getImage.setAttribute("download", "スクショ!.png");
+    getImage.click();
+    varr.style.display="flex";
+  });			
+        }
+        function backcolor(){
+            let color = document.getElementById('backcolor');
+            document.body.style.backgroundColor=color.value;
+            getInvertedColor(color.value);
+        }
+        function getInvertedColor(colorCode) {
+  // 16進数を変換
+  const red = parseInt(colorCode.substr(1,2), 16);
+  const green = parseInt(colorCode.substr(3,2), 16);
+  const blue = parseInt(colorCode.substr(5,2), 16);
+  // 明るさを判定
+  const luminance = ( red*299 + green*587 + blue*114 ) / 2550;
+  // 明るいときは黒、暗いときは白を返す（60の基準値は調整する）
+  let setc = document.getElementById('sett');
+  if (luminance > 60) {
+    //明るい
+    setc.style.color="black";
+  } else {
+   //暗い
+   setc.style.color="white";
+  }
+}
+function sizesyu(){
+    document.getElementById('sizeyoko').value = document.documentElement.clientWidth;
+    document.getElementById('sizetate').value= document.documentElement.clientHeight;
+}
+    </script>
+</html>

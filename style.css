@@ -1,0 +1,33 @@
+.big{
+    display: flex;
+    height: 100%;
+}
+#sizee{
+    display: inline-block;
+font-size: 200px;
+margin-right: auto;
+margin-left: auto;
+margin-top: auto;
+margin-bottom: auto;
+}
+body{
+  margin: 0;
+}
+.content{
+-ms-overflow-style: none;
+scrollbar-width: none;
+}
+.content::-webkit-scrollbar{
+display:none;
+}
+body.no_scroll{
+overflow: hidden;
+}
+.setting{
+    display: flex;
+    position: block;
+}
+textarea{
+    height:25.2px;
+    font-size: 16px;
+}
