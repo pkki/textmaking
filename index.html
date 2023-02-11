@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <title>謎のツール</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div class="setting" id="sett">
-           <div><p>大きさ</p><input type="range" max="500" min="1" id="fontsize" oninput="fontsize();" value="100"></div>
+           <div><p id ="ookisa">大きさ:100px</p><input type="range" max="500" min="1" id="fontsize" oninput="fontsize();" value="100"></div>
            <div><p>テキスト</p><textarea type="text" value="パソコン" id="texts" onkeyup="change()">パソコン</textarea></div>
            <div><p>文字の色</p><input type="color" oninput="color()" id="color"></div>
            <div><p>背景の色</p><input type="color" oninput="backcolor()" id="backcolor" value="#ffffff"></div>
@@ -28,7 +28,9 @@
         function fontsize(){
             let size = document.getElementById('fontsize');
             var geth1 = document.getElementById('sizee');
+            let text1 = document.getElementById('ookisa')
             geth1.style.fontSize= (size.value+"px");
+            text1.textContent = ("大きさ:"+size.value+"px")
         }
         function change(){
             let get = document.getElementById('texts');
@@ -41,10 +43,10 @@
             geth1.style.color=color.value;
         }
         function changefont(){
-            var fontfile = document.getElementById('fontfile').value;
+            let fontfile = document.getElementById('fontfile').value;
             var fontFace = new FontFace(
   "Cosmos Logic", 
-  "url("+fontfile+")", 
+  "url("+unescape(fontfile)+")", 
   { style: 'normal'}
 );
  
@@ -104,6 +106,19 @@ html2canvas(element,{
 function sizesyu(){
     document.getElementById('sizeyoko').value = document.documentElement.clientWidth;
     document.getElementById('sizetate').value= document.documentElement.clientHeight;
+}
+
+
+    </script>
+    <script>
+       document.addEventListener('keydown', keydownEvent,false); // ①
+function keydownEvent(event){ // ②
+  if(event.key === "a" || event.key === "A") { // ③
+    colorful();
+  }
+}
+function colorful(){
+    
 }
     </script>
 </html>
